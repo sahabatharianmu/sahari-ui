@@ -1,0 +1,55 @@
+<!-- @dsCard group="Dashboard" viewport="1200x700" name="Professional & Admin Dashboard" subtitle="Session schedule, earnings, moderation queue" -->
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>*{box-sizing:border-box;margin:0}body{background:var(--neu-surface)}</style>
+</head><body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel" src="ProfessionalDashboard.jsx"></script>
+<script type="text/babel" src="AdminModeration.jsx"></script>
+<script type="text/babel">
+const ds = window.SahariDesignSystem_9526ae;
+const { Avatar, IconButton } = ds;
+function Shell() {
+  const [section, setSection] = React.useState("dashboard");
+  const nav = [
+    { value: "dashboard", label: "Dashboard" },
+    { value: "clients", label: "Klien" },
+    { value: "moderation", label: "Moderasi" },
+  ];
+  return (
+    <div style={{ display: "flex", minHeight: 700, fontFamily: "var(--font-body)" }}>
+      <div style={{ width: 220, background: "var(--neu-surface)", boxShadow: "var(--shadow-neu-raised-sm)", zIndex: 2, padding: 20, display: "flex", flexDirection: "column", gap: 24 }}>
+        <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 20, color: "var(--purple-700)" }}>Sahari Pro</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {nav.map(n => (
+            <div key={n.value} onClick={() => setSection(n.value === "clients" ? "dashboard" : n.value)}
+              style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: "var(--radius-md)", cursor: "pointer",
+                background: section === n.value ? "var(--purple-50)" : "transparent", color: section === n.value ? "var(--purple-700)" : "var(--text-secondary)", fontWeight: 600, fontSize: 14 }}>
+              <span>{n.icon}</span>{n.label}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <div style={{ height: 64, background: "var(--neu-surface)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 28px" }}>
+          <div style={{ fontWeight: 700, fontSize: 17, color: "var(--text-primary)", fontFamily: "var(--font-display)" }}>{section === "dashboard" ? "Dashboard Praktik" : "Moderasi Konten"}</div>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <IconButton icon={<span aria-hidden="true" style={{ fontSize: 15, fontWeight: 700 }}>N</span>} aria-label="Notifikasi" />
+            <Avatar name="Dr. Amara Putri" size="sm" />
+          </div>
+        </div>
+        <div style={{ flex: 1, padding: 28, overflowY: "auto" }}>
+          {section === "dashboard" ? <ProfessionalDashboard ds={ds} /> : <AdminModeration ds={ds} />}
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Shell />);
+</script>
+</body></html>

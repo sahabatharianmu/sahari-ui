@@ -1,0 +1,45 @@
+<!-- @dsCard group="Components" viewport="700x480" name="Forms" -->
+<link rel="stylesheet" href="../../styles.css">
+<div id="root" style="padding:24px;background:var(--neu-surface);font-family:var(--font-body)"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { Button, IconButton, Input, Textarea, Select, Checkbox, Radio, Switch, RatingInput } = window.SahariDesignSystem_9526ae;
+function Demo(){
+  const [chk,setChk]=React.useState(true);
+  const [rad,setRad]=React.useState("video");
+  const [sw,setSw]=React.useState(true);
+  const [rating,setRating]=React.useState(4);
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:16}}>
+      <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+        <Button variant="primary">Book session</Button>
+        <Button variant="secondary">Save</Button>
+        <Button variant="ghost">Cancel</Button>
+        <Button variant="outline">Filter</Button>
+        <Button variant="danger">Delete</Button>
+        <Button variant="primary" disabled>Disabled</Button>
+        <IconButton aria-label="Like" icon={<span>♥</span>} />
+        <IconButton aria-label="More" icon={<span>⋯</span>} variant="ghost" />
+        <Button variant="primary" loading>Booking</Button>
+      </div>
+      <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
+        <Input label="Email" placeholder="you@email.com" hint="We'll never share this" />
+        <Input label="Password" type="password" error="Password must be 8+ characters" />
+        <Select label="Specialty" options={["Anxiety","Relationships","Grief"]} />
+      </div>
+      <Textarea label="Share gently" placeholder="What's on your mind today?" />
+      <div style={{display:"flex",gap:20,alignItems:"center",flexWrap:"wrap"}}>
+        <Checkbox label="Remember me" checked={chk} onChange={setChk} />
+        <Radio label="Video call" checked={rad==="video"} onChange={()=>setRad("video")} />
+        <Radio label="Chat" checked={rad==="chat"} onChange={()=>setRad("chat")} />
+        <Switch label="Push notifications" checked={sw} onChange={setSw} />
+      </div>
+      <RatingInput label="Beri rating sesi ini" value={rating} onValueChange={setRating} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+</script>

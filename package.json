@@ -1,0 +1,16 @@
+{
+  "name": "sahari-ui-workspace",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "build": "pnpm -r --filter './packages/**' build",
+    "dev": "pnpm --filter @sahari-ui/storybook storybook",
+    "storybook": "pnpm --filter @sahari-ui/storybook storybook",
+    "test": "pnpm --filter @sahari-ui/react test",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "typescript": "latest"
+  }
+}

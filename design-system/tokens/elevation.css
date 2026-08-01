@@ -1,0 +1,36 @@
+:root{
+--shadow-xs:0 1px 2px rgba(42,37,64,0.06);
+--shadow-sm:0 2px 6px rgba(42,37,64,0.06),0 1px 2px rgba(42,37,64,0.04);
+--shadow-md:0 8px 20px rgba(83,56,158,0.10),0 2px 6px rgba(42,37,64,0.05);
+--shadow-lg:0 16px 40px rgba(83,56,158,0.14),0 4px 10px rgba(42,37,64,0.06);
+--shadow-focus:0 0 0 3px color-mix(in oklch, var(--purple-500) 30%, transparent);
+--shadow-neu-raised:8px 8px 18px var(--neu-shadow-dark),-8px -8px 18px var(--neu-shadow-light);
+--shadow-neu-raised-sm:5px 5px 10px var(--neu-shadow-dark-sm),-5px -5px 10px var(--neu-shadow-light-sm);
+--shadow-neu-inset:inset 4px 4px 9px var(--neu-shadow-dark),inset -4px -4px 9px var(--neu-shadow-light);
+--shadow-neu-inset-sm:inset 3px 3px 6px var(--neu-shadow-dark-sm),inset -3px -3px 6px var(--neu-shadow-light-sm);
+--shadow-neu-brand:7px 7px 16px rgba(83,56,158,0.30),-4px -4px 12px rgba(182,146,246,0.35);
+--shadow-neu-brand-inset:inset 3px 3px 7px rgba(62,42,118,0.45),inset -3px -3px 7px rgba(184,145,255,0.45);
+--shadow-card:0 1px 2px rgba(42,37,64,0.04),0 2px 8px rgba(42,37,64,0.05);
+--shadow-card-hover:0 2px 4px rgba(42,37,64,0.05),0 6px 16px rgba(83,56,158,0.08);
+--ease-standard:cubic-bezier(.4,0,.2,1);/* @kind other */
+--ease-out:cubic-bezier(.16,1,.3,1);/* @kind other */
+--dur-fast:120ms;/* @kind other */
+--dur-base:200ms;/* @kind other */
+--dur-slow:320ms;/* @kind other */
+}
+@keyframes sahari-pulse{0%{transform:scale(0.85);opacity:0.9}70%{transform:scale(1.35);opacity:0}100%{transform:scale(1.35);opacity:0}}
+@keyframes sh-spin{to{transform:rotate(360deg)}}
+@keyframes sh-shimmer{to{background-position:-200% 0}}
+@media (prefers-reduced-motion: reduce){
+  *,::before,::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:0.01ms!important;}
+}
+[data-theme="dark"]{
+--shadow-xs:0 1px 2px rgba(0,0,0,0.35);
+--shadow-sm:0 2px 6px rgba(0,0,0,0.35),0 1px 2px rgba(0,0,0,0.25);
+--shadow-md:0 8px 20px rgba(0,0,0,0.4),0 2px 6px rgba(0,0,0,0.25);
+--shadow-lg:0 16px 40px rgba(0,0,0,0.5),0 4px 10px rgba(0,0,0,0.3);
+--shadow-neu-brand:7px 7px 16px rgba(0,0,0,0.5),-4px -4px 12px rgba(158,119,237,0.25);
+--shadow-neu-brand-inset:inset 3px 3px 7px rgba(0,0,0,0.55),inset -3px -3px 7px rgba(158,119,237,0.2);
+--shadow-card:0 1px 2px rgba(0,0,0,0.3),0 2px 8px rgba(0,0,0,0.25);
+--shadow-card-hover:0 2px 4px rgba(0,0,0,0.35),0 6px 16px rgba(0,0,0,0.3);
+}

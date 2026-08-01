@@ -1,0 +1,29 @@
+{
+  "name": "@sahari-ui/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build": "storybook build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hugeicons/react": "latest",
+    "@sahari-ui/react": "workspace:*",
+    "@sahari-ui/tokens": "workspace:*",
+    "@storybook/react-vite": "latest",
+    "@tailwindcss/vite": "latest",
+    "framer-motion": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "storybook": "latest",
+    "vite": "latest",
+    "@storybook/addon-a11y": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}

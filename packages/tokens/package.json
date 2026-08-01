@@ -1,0 +1,20 @@
+{
+  "name": "@sahari-ui/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": ["*.css", "dist/*.css"],
+  "exports": {
+    ".": "./dist/index.css",
+    "./index.css": "./dist/index.css",
+    "./colors.css": "./dist/colors.css",
+    "./typography.css": "./dist/typography.css",
+    "./spacing.css": "./dist/spacing.css",
+    "./elevation.css": "./dist/elevation.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "rm -rf dist && mkdir -p dist && cp src/*.css dist/",
+    "typecheck": "true"
+  }
+}
