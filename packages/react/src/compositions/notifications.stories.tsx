@@ -1,6 +1,10 @@
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { AccountSwitcher, type Account } from "../components/account-switcher/account-switcher";
 import { Avatar } from "../components/avatar/avatar";
+import { BottomNav } from "../components/bottom-nav/bottom-nav";
 import { Card } from "../components/card/card";
+import { SideNav } from "../components/side-nav/side-nav";
 
 const meta = { title: "Compositions/Notifications" } satisfies Meta;
 export default meta;
@@ -37,32 +41,68 @@ function NotificationRow({ item }: { item: Notification }) {
   );
 }
 
+const accounts: Account[] = [
+  { id: "personal", name: "Kamu", role: "Akun pribadi" },
+  { id: "pro", name: "Dr. Kamu", role: "Psikolog" },
+];
+
+const navItems = [
+  { value: "home", label: "Beranda" },
+  { value: "discover", label: "Temukan" },
+  { value: "messages", label: "Pesan" },
+  { value: "profile", label: "Profil" },
+];
+
 function NotificationsDemo() {
+  const [nav, setNav] = React.useState("home");
+  const [account, setAccount] = React.useState("personal");
+
   return (
-    <div style={{ width: 390, display: "flex", flexDirection: "column", gap: 16, background: "var(--bg-base)", padding: 18, fontFamily: "var(--font-body)" }}>
-      <div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: .4, marginBottom: 6 }}>Hari ini</div>
-        <Card style={{ display: "flex", flexDirection: "column" }}>
-          {today.map((item, i) => (
-            <div key={item.id} style={{ borderBottom: i < today.length - 1 ? "1px solid var(--border-subtle)" : "none" }}>
-              <NotificationRow item={item} />
-            </div>
-          ))}
-        </Card>
+    <div className="sh-shell">
+      <div className="sh-shell__mobile-header">
+        <strong style={{ color: "var(--purple-700)", fontSize: 20, fontFamily: "var(--font-display)" }}>Notifikasi</strong>
+        <AccountSwitcher variant="auto" accounts={accounts} activeAccountId={account} onSwitch={setAccount} onAddAccount={() => {}} onLogout={() => {}} />
       </div>
 
-      <div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: .4, marginBottom: 6 }}>Sebelumnya</div>
-        <Card style={{ display: "flex", flexDirection: "column" }}>
-          {earlier.map((item, i) => (
-            <div key={item.id} style={{ borderBottom: i < earlier.length - 1 ? "1px solid var(--border-subtle)" : "none" }}>
-              <NotificationRow item={item} />
+      <div className="sh-shell__body">
+        <div className="sh-shell__grid">
+          <aside className="sh-shell__sidebar">
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <strong style={{ color: "var(--purple-700)", fontSize: 22, fontFamily: "var(--font-display)", padding: "0 14px" }}>Sahari</strong>
+              <SideNav value={nav} onValueChange={setNav} items={navItems} />
             </div>
-          ))}
-        </Card>
+            <AccountSwitcher variant="auto" accounts={accounts} activeAccountId={account} onSwitch={setAccount} onAddAccount={() => {}} onLogout={() => {}} />
+          </aside>
+
+          <main className="sh-shell__main" style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 560 }}>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: .4, marginBottom: 6 }}>Hari ini</div>
+              <Card style={{ display: "flex", flexDirection: "column" }}>
+                {today.map((item, i) => (
+                  <div key={item.id} style={{ borderBottom: i < today.length - 1 ? "1px solid var(--border-subtle)" : "none" }}>
+                    <NotificationRow item={item} />
+                  </div>
+                ))}
+              </Card>
+            </div>
+
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-tertiary)", textTransform: "uppercase", letterSpacing: .4, marginBottom: 6 }}>Sebelumnya</div>
+              <Card style={{ display: "flex", flexDirection: "column" }}>
+                {earlier.map((item, i) => (
+                  <div key={item.id} style={{ borderBottom: i < earlier.length - 1 ? "1px solid var(--border-subtle)" : "none" }}>
+                    <NotificationRow item={item} />
+                  </div>
+                ))}
+              </Card>
+            </div>
+          </main>
+        </div>
       </div>
+
+      <BottomNav className="sh-shell__bottom-nav" value={nav} onValueChange={setNav} items={navItems} />
     </div>
   );
 }
 
-export const List: Story = { render: () => <NotificationsDemo /> };
+export const App: Story = { render: () => <NotificationsDemo /> };

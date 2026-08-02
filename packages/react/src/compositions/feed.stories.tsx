@@ -1,10 +1,12 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { AccountSwitcher, type Account } from "../components/account-switcher/account-switcher";
 import { Avatar } from "../components/avatar/avatar";
 import { Badge } from "../components/badge/badge";
 import { Button } from "../components/button/button";
 import { Card } from "../components/card/card";
 import { EmptyState } from "../components/empty-state/empty-state";
+import { BottomNav } from "../components/bottom-nav/bottom-nav";
 import { IconButton } from "../components/icon-button/icon-button";
 import { Menu } from "../components/menu/menu";
 import { Reaction } from "../components/reaction/reaction";
@@ -76,6 +78,11 @@ type Post = {
   likes: number;
 };
 
+const accounts: Account[] = [
+  { id: "personal", name: "Kamu", role: "Akun pribadi" },
+  { id: "pro", name: "Dr. Kamu", role: "Psikolog" },
+];
+
 const posts: Post[] = [
   { id: 1, name: "Rani Wulandari", anon: false, time: "2j", tag: "Kecemasan", text: "Hari ini aku coba journaling sebelum tidur, ternyata bikin pikiran lebih tenang. Ada yang punya rutinitas malam serupa?", likes: 24 },
   { id: 2, name: "Anonim", anon: true, time: "5j", tag: "Hubungan", text: "Lagi belajar bilang \u201Ctidak apa-apa untuk tidak baik-baik saja\u201D. Pelan-pelan, tapi progres tetap progres.", likes: 41 },
@@ -137,56 +144,71 @@ function FeedList() {
   );
 }
 
-export const PostFeed: Story = {
-  render: () => (
-    <div style={{ width: 390, background: "var(--bg-base)", padding: 18 }}>
-      <FeedList />
-    </div>
-  ),
-};
+const navItems = [
+  { value: "home", label: "Beranda" },
+  { value: "discover", label: "Temukan" },
+  { value: "messages", label: "Pesan" },
+  { value: "profile", label: "Profil" },
+];
 
-export const DesktopLayout: Story = {
+function SuggestionsRail() {
+  return (
+    <Card>
+      <strong style={{ display: "block", marginBottom: 12, color: "var(--text-primary)", fontSize: 14 }}>Psikolog untuk kamu</strong>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {[{ name: "Dr. Amara Putri", spec: "Kecemasan" }, { name: "Dr. Sinta Dewi", spec: "Stres kerja" }].map((p) => (
+          <div key={p.name} style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <Avatar name={p.name} size="sm" online />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</div>
+              <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{p.spec}</div>
+            </div>
+            <Button variant="outline" size="sm">Lihat</Button>
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+
+/**
+ * One responsive shell: bottom nav + single column under 768px, sidebar (+ rail
+ * from 1024px) above it. Toggle the Storybook viewport toolbar to see it adapt
+ * live — no separate mobile/desktop stories.
+ */
+export const App: Story = {
   render: () => {
     const [nav, setNav] = React.useState("home");
+    const [account, setAccount] = React.useState("personal");
+
     return (
-      <div style={{ display: "flex", justifyContent: "center", background: "var(--bg-base)", padding: "32px 24px", minHeight: 700 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "220px minmax(0, 600px) 260px", gap: 32, width: "100%", maxWidth: "var(--container-desktop)" }}>
-          <aside style={{ display: "flex", flexDirection: "column", gap: 24, position: "sticky", top: 32, alignSelf: "start" }}>
-            <strong style={{ color: "var(--purple-700)", fontSize: 22, fontFamily: "var(--font-display)", padding: "0 14px" }}>Sahari</strong>
-            <SideNav
-              value={nav}
-              onValueChange={setNav}
-              items={[
-                { value: "home", label: "Beranda" },
-                { value: "discover", label: "Temukan" },
-                { value: "messages", label: "Pesan" },
-                { value: "profile", label: "Profil" },
-              ]}
-            />
-          </aside>
-
-          <main>
-            <FeedList />
-          </main>
-
-          <aside style={{ position: "sticky", top: 32, alignSelf: "start" }}>
-            <Card>
-              <strong style={{ display: "block", marginBottom: 12, color: "var(--text-primary)", fontSize: 14 }}>Psikolog untuk kamu</strong>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {[{ name: "Dr. Amara Putri", spec: "Kecemasan" }, { name: "Dr. Sinta Dewi", spec: "Stres kerja" }].map((p) => (
-                  <div key={p.name} style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <Avatar name={p.name} size="sm" online />
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</div>
-                      <div style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{p.spec}</div>
-                    </div>
-                    <Button variant="outline" size="sm">Lihat</Button>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </aside>
+      <div className="sh-shell">
+        <div className="sh-shell__mobile-header">
+          <strong style={{ color: "var(--purple-700)", fontSize: 20, fontFamily: "var(--font-display)" }}>Sahari</strong>
+          <AccountSwitcher variant="auto" accounts={accounts} activeAccountId={account} onSwitch={setAccount} onAddAccount={() => {}} onLogout={() => {}} />
         </div>
+
+        <div className="sh-shell__body">
+          <div className="sh-shell__grid">
+            <aside className="sh-shell__sidebar">
+              <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                <strong style={{ color: "var(--purple-700)", fontSize: 22, fontFamily: "var(--font-display)", padding: "0 14px" }}>Sahari</strong>
+                <SideNav value={nav} onValueChange={setNav} items={navItems} />
+              </div>
+              <AccountSwitcher variant="auto" accounts={accounts} activeAccountId={account} onSwitch={setAccount} onAddAccount={() => {}} onLogout={() => {}} />
+            </aside>
+
+            <main className="sh-shell__main">
+              <FeedList />
+            </main>
+
+            <aside className="sh-shell__rail">
+              <SuggestionsRail />
+            </aside>
+          </div>
+        </div>
+
+        <BottomNav className="sh-shell__bottom-nav" value={nav} onValueChange={setNav} items={navItems} />
       </div>
     );
   },

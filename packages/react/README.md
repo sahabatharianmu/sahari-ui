@@ -23,6 +23,7 @@ export function Example() {
 
 ## Components
 
+- AccountSwitcher
 - Avatar
 - AvatarGroup
 - Badge
@@ -31,6 +32,7 @@ export function Example() {
 - Button
 - Card
 - Checkbox
+- Combobox
 - Dialog
 - Divider
 - EmptyState

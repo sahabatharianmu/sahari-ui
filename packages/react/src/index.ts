@@ -1,3 +1,4 @@
+export * from "./components/account-switcher/account-switcher";
 export * from "./components/avatar/avatar";
 export * from "./components/avatar-group/avatar-group";
 export * from "./components/badge/badge";
@@ -6,6 +7,7 @@ export * from "./components/bottom-sheet/bottom-sheet";
 export * from "./components/button/button";
 export * from "./components/card/card";
 export * from "./components/checkbox/checkbox";
+export * from "./components/combobox/combobox";
 export * from "./components/dialog/dialog";
 export * from "./components/divider/divider";
 export * from "./components/empty-state/empty-state";

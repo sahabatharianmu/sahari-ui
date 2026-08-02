@@ -1,10 +1,13 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { AccountSwitcher, type Account } from "../components/account-switcher/account-switcher";
 import { Avatar } from "../components/avatar/avatar";
 import { Badge } from "../components/badge/badge";
+import { BottomNav } from "../components/bottom-nav/bottom-nav";
 import { Card } from "../components/card/card";
 import { IconButton } from "../components/icon-button/icon-button";
 import { Input } from "../components/input/input";
+import { SideNav } from "../components/side-nav/side-nav";
 
 const meta = { title: "Compositions/Messages" } satisfies Meta;
 export default meta;
@@ -33,27 +36,63 @@ function SendIcon() {
   );
 }
 
+const accounts: Account[] = [
+  { id: "personal", name: "Kamu", role: "Akun pribadi" },
+  { id: "pro", name: "Dr. Kamu", role: "Psikolog" },
+];
+
+const navItems = [
+  { value: "home", label: "Beranda" },
+  { value: "discover", label: "Temukan" },
+  { value: "messages", label: "Pesan" },
+  { value: "profile", label: "Profil" },
+];
+
 function ConversationsDemo() {
+  const [nav, setNav] = React.useState("messages");
+  const [account, setAccount] = React.useState("personal");
+
   return (
-    <div style={{ width: 390, display: "flex", flexDirection: "column", gap: 12, background: "var(--bg-base)", padding: 18, fontFamily: "var(--font-body)" }}>
-      <Input placeholder="Cari percakapan" aria-label="Cari percakapan" />
-      <div className="sh-stagger" style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-        {conversations.map((c) => (
-          <Card key={c.id} interactive style={{ display: "flex", gap: 10, alignItems: "center", padding: 14 }}>
-            <Avatar name={c.name} size="md" online={c.online} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
-                <strong style={{ fontSize: 14, color: "var(--text-primary)" }}>{c.name}</strong>
-                <span style={{ fontSize: 12, color: "var(--text-tertiary)", flexShrink: 0 }}>{c.time}</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", gap: 8, marginTop: 2 }}>
-                <span style={{ fontSize: 13, color: "var(--text-secondary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.preview}</span>
-                {c.unread ? <Badge tone="brand">{c.unread}</Badge> : null}
-              </div>
-            </div>
-          </Card>
-        ))}
+    <div className="sh-shell">
+      <div className="sh-shell__mobile-header">
+        <strong style={{ color: "var(--purple-700)", fontSize: 20, fontFamily: "var(--font-display)" }}>Pesan</strong>
+        <AccountSwitcher variant="auto" accounts={accounts} activeAccountId={account} onSwitch={setAccount} onAddAccount={() => {}} onLogout={() => {}} />
       </div>
+
+      <div className="sh-shell__body">
+        <div className="sh-shell__grid">
+          <aside className="sh-shell__sidebar">
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <strong style={{ color: "var(--purple-700)", fontSize: 22, fontFamily: "var(--font-display)", padding: "0 14px" }}>Sahari</strong>
+              <SideNav value={nav} onValueChange={setNav} items={navItems} />
+            </div>
+            <AccountSwitcher variant="auto" accounts={accounts} activeAccountId={account} onSwitch={setAccount} onAddAccount={() => {}} onLogout={() => {}} />
+          </aside>
+
+          <main className="sh-shell__main" style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 480 }}>
+            <Input placeholder="Cari percakapan" aria-label="Cari percakapan" />
+            <div className="sh-stagger" style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {conversations.map((c) => (
+                <Card key={c.id} interactive style={{ display: "flex", gap: 10, alignItems: "center", padding: 14 }}>
+                  <Avatar name={c.name} size="md" online={c.online} />
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
+                      <strong style={{ fontSize: 14, color: "var(--text-primary)" }}>{c.name}</strong>
+                      <span style={{ fontSize: 12, color: "var(--text-tertiary)", flexShrink: 0 }}>{c.time}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 8, marginTop: 2 }}>
+                      <span style={{ fontSize: 13, color: "var(--text-secondary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.preview}</span>
+                      {c.unread ? <Badge tone="brand">{c.unread}</Badge> : null}
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </main>
+        </div>
+      </div>
+
+      <BottomNav className="sh-shell__bottom-nav" value={nav} onValueChange={setNav} items={navItems} />
     </div>
   );
 }
@@ -107,5 +146,5 @@ function ChatThreadDemo() {
   );
 }
 
-export const ConversationList: Story = { render: () => <ConversationsDemo /> };
+export const App: Story = { render: () => <ConversationsDemo /> };
 export const ChatThread: Story = { render: () => <ChatThreadDemo /> };

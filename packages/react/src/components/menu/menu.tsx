@@ -14,12 +14,14 @@ export type MenuProps = {
   trigger: React.ReactElement;
   items: MenuItem[];
   align?: "start" | "end";
+  /** Opens above the trigger instead of below — for triggers pinned near the bottom of the viewport (e.g. a sidebar footer). */
+  side?: "top" | "bottom";
   /** Accessible name for the menu itself, e.g. "Opsi cerita". */
   label?: string;
 };
 
 /** Hand-rolled dropdown action menu (report/delete/share, avatar menu, etc.), same mechanics as `Select`'s listbox. */
-export function Menu({ trigger, items, align = "start", label = "Menu" }: MenuProps) {
+export function Menu({ trigger, items, align = "start", side = "bottom", label = "Menu" }: MenuProps) {
   const [open, setOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLElement>(null);
@@ -71,7 +73,7 @@ export function Menu({ trigger, items, align = "start", label = "Menu" }: MenuPr
     <div ref={containerRef} style={{ position: "relative", display: "inline-flex" }}>
       {clonedTrigger}
       {open ? (
-        <ul role="menu" aria-label={label} className="sh-menu" data-align={align}>
+        <ul role="menu" aria-label={label} className="sh-menu" data-align={align} data-side={side}>
           {items.map((item, index) => (
             <li key={index} role="none">
               <button
