@@ -1,8 +1,0 @@
-<!-- @dsCard group="Brand" viewport="700x150" name="Motion" subtitle="Calm easing — no bounce, no snap" -->
-<link rel="stylesheet" href="../styles.css">
-<div style="height:150px;display:flex;align-items:center;justify-content:center;gap:40px;background:var(--bg-base);font-family:var(--font-body);font-size:12px;color:var(--text-secondary)">
-<div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div id="d1" style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--purple-500)"></div>fast 120ms</div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div id="d2" style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--purple-500)"></div>base 200ms</div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div id="d3" style="width:48px;height:48px;border-radius:var(--radius-md);background:var(--purple-500)"></div>slow 320ms</div>
-<script>setInterval(()=>{[['d1',120],['d2',200],['d3',320]].forEach(([id,dur])=>{const el=document.getElementById(id);el.style.transition='transform '+dur+'ms cubic-bezier(.4,0,.2,1)';el.style.transform=el.style.transform==='scale(1.15)'?'scale(1)':'scale(1.15)'})},900)</script>
-</div>
