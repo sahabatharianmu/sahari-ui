@@ -1,7 +1,16 @@
 {
   "name": "@sahari-ui/react",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "description": "React primitives for Sahari, styled with Sahari design tokens and Tailwind v4 CSS.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sahabatharianmu/sahari-ui.git",
+    "directory": "packages/react"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "sideEffects": [
     "dist/styles.css"
