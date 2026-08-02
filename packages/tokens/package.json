@@ -1,6 +1,6 @@
 {
   "name": "@sahari-ui/tokens",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Framework-agnostic Sahari design tokens as CSS custom properties.",
   "license": "MIT",
   "repository": {
@@ -12,7 +12,10 @@
     "access": "public"
   },
   "type": "module",
-  "sideEffects": ["*.css", "dist/*.css"],
+  "sideEffects": [
+    "*.css",
+    "dist/*.css"
+  ],
   "exports": {
     ".": "./dist/index.css",
     "./index.css": "./dist/index.css",
@@ -21,7 +24,9 @@
     "./spacing.css": "./dist/spacing.css",
     "./elevation.css": "./dist/elevation.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rm -rf dist && mkdir -p dist && cp src/*.css dist/",
     "typecheck": "true"
