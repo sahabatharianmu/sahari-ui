@@ -4,13 +4,16 @@ storybook-static
 coverage
 .DS_Store
 
-# design-sync (claude.ai/design) — build artifacts, scratch, verification state
+# design-sync (claude.ai/design) — local tool state, not project source
 .ds-sync/
 ds-bundle/
-.design-sync/sb-reference/
-.design-sync/.cache/
-.design-sync/learnings/
-.design-sync/node_modules
+.design-sync/
+
+# Claude Code local session/worktree state
+.claude/
+
+# agent skills — local tooling, not project source
+.agents/skills/
 
 # raw Claude-generated design-system reference/moodboard — local only, not production source
 design-system/
