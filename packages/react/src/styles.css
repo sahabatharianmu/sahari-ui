@@ -13,9 +13,15 @@
 @layer base {
   * { box-sizing: border-box; }
   :where(button, input, textarea, select) { font: inherit; }
+  /* Keyboard focus indicator: neutral outline, NOT the purple --focus-ring
+     glow. box-shadow stretched to the element's box and, for inputs nested
+     inside decorated wrappers (sh-field__control, search pills), painted a
+     second tight inner stroke on TOP of the wrapper's own focus cue.
+     Components that need a brand-tinted cue define it themselves
+     (.sh-field__control:focus-within, .sh-rating/.sh-choice/.sh-switch). */
   :where(button, [role="button"], input, textarea, select):focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
+    outline: 2px solid var(--border-strong);
+    outline-offset: 2px;
   }
 }
 
@@ -95,12 +101,13 @@
   .sh-field { display: flex; flex-direction: column; gap: var(--space-2); width: 100%; font-family: var(--font-body); }
   .sh-field__label { font-size: var(--fs-body-sm); font-weight: var(--fw-semibold); color: var(--text-primary); }
   .sh-field__control { display: flex; align-items: center; gap: var(--space-2); min-height: 48px; padding: 0 var(--space-4); border-radius: var(--radius-md); background: var(--bg-surface); border: 1.5px solid var(--border-default); transition: box-shadow var(--dur-base) var(--ease-standard), border-color var(--dur-base) var(--ease-standard); }
-  .sh-field__control:focus-within { border-color: var(--brand-primary); box-shadow: var(--shadow-neu-inset-sm); }
+  /* focus cue = brand border only; the neu inset token read as a pressed/stray inner stroke while typing */
+  .sh-field__control:focus-within { border-color: var(--brand-primary); }
   .sh-field[data-invalid="true"] .sh-field__control { border-color: var(--state-danger-solid); }
   .sh-field__input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text-primary); font-size: var(--fs-body); font-family: var(--font-body); }
-  /* .sh-field__control:focus-within already provides the field's focus indicator (border-color + inset shadow) —
-     without this, the base :focus-visible rule above also fires directly on the input, drawing a second,
-     tightly-hugging ring inside the first and reading as a stray inner stroke. */
+  /* .sh-field__control:focus-within already provides the field's focus indicator
+     (border-color + inset shadow); the input itself stays outline: 0 so the base
+     :focus-visible rule never draws a second tight ring inside the wrapper. */
   .sh-field__input:focus-visible { box-shadow: none; }
   .sh-field__input::placeholder { color: var(--text-tertiary); }
   .sh-field__input:disabled { cursor: not-allowed; opacity: .58; }
