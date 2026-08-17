@@ -26,12 +26,13 @@
 --green-700:#1D7A4B;
 --amber-100:#FDF0D5;
 --amber-500:#E8A93B;
---amber-700:#A66A12;
+--amber-700:#945E10;
 --rose-100:#FBE4E4;
 --rose-500:#E0687A;
 --rose-700:#AD3F52;
 --sky-100:#E1F1FB;
 --sky-500:#4B9BD6;
+--sky-700:#256DA2;
 --bg-base:var(--neutral-25);
 --bg-surface:var(--neutral-0);
 --bg-surface-sunken:var(--purple-50);
@@ -66,7 +67,7 @@
 --state-danger-fg:var(--rose-700);
 --state-danger-solid:var(--rose-500);
 --state-info-bg:var(--sky-100);
---state-info-fg:var(--sky-500);
+--state-info-fg:var(--sky-700);
 --focus-ring:0 0 0 3px color-mix(in oklch, var(--purple-500) 30%, transparent);
 }
 [data-theme="dark"]{
