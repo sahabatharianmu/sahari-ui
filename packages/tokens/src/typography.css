@@ -1,11 +1,16 @@
 @font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:400 800;font-display:swap;src:url(https://fonts.gstatic.com/s/plusjakartasans/v8/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_qU7NShXUEKi4Rw.woff2) format("woff2");}
-/* Fraunces: variable serif, loaded via Google Fonts CSS2 (opsz 9..144 range
-   covers both small on-screen sizes and the display sizes headings actually
-   use) -- consuming apps should link
-   https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&display=swap
-   rather than duplicating a hashed woff2 URL here, which drifts out of date. */
+/* Space Grotesk: distinctive grotesk sans, loaded via Google Fonts CSS2 --
+   consuming apps should link
+   https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap
+   rather than duplicating a hashed woff2 URL here, which drifts out of date.
+   Tried Fraunces (a serif) first -- wrong call: --font-display renders at
+   20-28px in dense product UI (settings rows, card titles, nav labels),
+   not a marketing hero, and thin serif strokes go muddy at that size. A
+   second distinctive sans avoids the serif-at-small-size problem while
+   still reading as a different, deliberate face next to Plus Jakarta
+   Sans' rounded-humanist body. */
 :root{
---font-display:"Fraunces","Plus Jakarta Sans",-apple-system,"Segoe UI",serif;
+--font-display:"Space Grotesk","Plus Jakarta Sans",-apple-system,"Segoe UI",sans-serif;
 --font-body:"Plus Jakarta Sans",-apple-system,"Segoe UI",sans-serif;
 --font-mono:"SFMono-Regular",Menlo,Consolas,monospace;
 --fs-display-lg:40px;
