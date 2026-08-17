@@ -1,6 +1,6 @@
 {
   "name": "@sahari-ui/tokens",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Framework-agnostic Sahari design tokens as CSS custom properties.",
   "license": "MIT",
   "repository": {
