@@ -296,7 +296,10 @@
   .sh-pulse-orb__ring { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, color-mix(in oklch, var(--purple-400) 55%, transparent) 0%, transparent 72%); }
   .sh-pulse-orb__core { width: 62%; height: 62%; border-radius: 50%; background: linear-gradient(150deg, var(--purple-300), var(--purple-600)); box-shadow: var(--shadow-neu-brand); }
 
-  .sh-reaction { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 6px 10px; border-radius: var(--radius-pill); color: var(--text-secondary); font-family: var(--font-body); font-size: var(--fs-body-sm); font-weight: var(--fw-semibold); cursor: pointer; transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
+  /* tabular-nums: reaction counts (votes, comments) change in place --
+     without it, "9"->"10" jitters the button's own width and nudges
+     whatever sits next to it in the row every time someone taps like. */
+  .sh-reaction { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 6px 10px; border-radius: var(--radius-pill); color: var(--text-secondary); font-family: var(--font-body); font-size: var(--fs-body-sm); font-weight: var(--fw-semibold); font-variant-numeric: tabular-nums; cursor: pointer; transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard); }
   .sh-reaction:where(:hover) { background: var(--bg-surface-sunken); }
   .sh-reaction:where(:active) { transform: scale(.94); }
   .sh-reaction__icon { display: inline-flex; }
